@@ -15,11 +15,6 @@ Install Git and Python 3.14.4 on the host first. These commands assume Bash on L
 ```bash
 git clone https://github.com/haiviet7012/Woodblocks-3D-to-2D-simulation.git
 cd Woodblocks-3D-to-2D-simulation
-python3.14 -c 'import sys; assert sys.version_info[:3] == (3, 14, 4), sys.version'
-python3.14 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m ipykernel install --user --name woodblocks-py314 --display-name 'Woodblocks (Python 3.14.4)'
-.venv/bin/python scripts/preflight.py --render-probe --variant cuda_ad_rgb
 ```
  
 Full instructions for setting up the environment is in the cell 0 of the notebook. After setting up, run the notebook and the output will be exported to /testing_outputs.
