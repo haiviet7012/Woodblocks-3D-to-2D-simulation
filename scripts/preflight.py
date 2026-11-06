@@ -29,7 +29,7 @@ def main():
             failures.append(f'{name}: {type(exc).__name__}: {exc}')
     mesh = args.mesh.resolve()
     if not mesh.is_file():
-        failures.append(f'Missing scan: {mesh}. Run git lfs pull, or ask the maintainer to upload it.')
+        failures.append(f'Missing scan: {mesh}. Copy the local scan here, or pass --mesh and update cfg.mesh_path.')
     else:
         with mesh.open('rb') as stream:
             header = stream.read(256)

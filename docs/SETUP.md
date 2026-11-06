@@ -4,23 +4,20 @@
 
 The recorded server uses CPython **3.14.4**, Linux x86_64 and glibc 2.43. The Python patch version is also recorded in `.python-version`; tools that understand that file can use it, but it does not install Python automatically.
 
-Install Python 3.14.4, Git and Git LFS using your host's supported installation method. For CUDA rendering, the host needs an NVIDIA GPU and a compatible NVIDIA driver. Python CUDA packages do not install the host driver. For LLVM rendering, the host must provide the LLVM runtime supported by Mitsuba/Dr.Jit. This project has not validated Windows, macOS or a different Linux distribution against the reference server.
+Install Python 3.14.4 and Git using your host's supported installation method. For CUDA rendering, the host needs an NVIDIA GPU and a compatible NVIDIA driver. Python CUDA packages do not install the host driver. For LLVM rendering, the host must provide the LLVM runtime supported by Mitsuba/Dr.Jit. This project has not validated Windows, macOS or a different Linux distribution against the reference server.
 
-Check `python3.14 --version`, `git lfs version` and, for GPU runs, `nvidia-smi`. Obtain the actual reference GPU/driver information using the environment capture below; it has not been invented or inferred from the package freeze.
+Check `python3.14 --version`, for GPU runs, `nvidia-smi`. Obtain the actual reference GPU/driver information using the environment capture below; it has not been invented or inferred from the package freeze.
 
-## 2. Clone with scan data
+## 2. Clone and provide the local scan
 
 ```bash
-git lfs install
 git clone https://github.com/haiviet7012/Woodblocks-3D-to-2D-simulation.git
 cd Woodblocks-3D-to-2D-simulation
-git lfs pull
-git lfs ls-files
 ```
 
-The expected input is `input/stl/03284.stl`. A text file beginning with `version https://git-lfs.github.com/spec/v1` is an unresolved pointer, not a mesh. Run `git lfs pull` and check access/quota if it remains a pointer. A ZIP download is not the recommended setup path.
+The expected input is `input/stl/03284.stl`. STL files under `input/` are ignored, including scans in nested date directories. Copy the real scan from your shared storage into this location after cloning, or configure its local path in section 1. Cloning alone does not provide STL data.
 
-The actual STL must first be committed and pushed by its owner. This setup PR includes tracking rules and documentation, not a fabricated scan. Follow `input/README.md` to upload it.
+Fonts, textures and other non-STL input assets are eligible for normal Git tracking. Their owner must commit and push the real files before clones can include them. Follow `input/README.md`.
 
 ## 3. Create the Python environment
 
@@ -131,7 +128,7 @@ Host drivers and system libraries still need separate provisioning. Store wheelh
 ## 9. Troubleshooting
 
 - Yellow VS Code import diagnostics: select the remote Python interpreter and kernel, then check `scripts/preflight.py`. A Git `U` marker means untracked, and `M` means modified; neither is a Python traceback.
-- Missing STL/pointer: push the real LFS object first, then run `git lfs pull` in the clone.
+- Missing STL: copy the real scan into `input/stl/03284.stl` locally, or update `cfg.mesh_path`.
 - Backend errors: inspect the per-sample JSON; do not interpret an empty metric as zero.
 - CUDA initialization failure: compare host driver/runtime and the selected variant with the reference server. LLVM is a separate execution condition.
 - Different output: compare input hashes, dirty code, configuration, seed, actual variant/SPP, texture/font/annotation assets and environment snapshots.
