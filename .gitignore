@@ -1,0 +1,24 @@
+# Môi trường Python
+.venv/
+__pycache__/
+*.pyc
+
+# Kết quả sinh ra khi chạy script / notebook (giữ outputs/.gitkeep để thư mục vẫn hiện trên repo)
+outputs/*
+!outputs/.gitkeep
+outputs.zip
+
+# Hình của báo cáo là output: chỉ ở máy (giữ figures/.gitkeep để thư mục vẫn hiện trên repo)
+figures/*
+!figures/.gitkeep
+
+# Scan: tải về máy, KHÔNG đưa lên repo (chỉ giữ input/.gitkeep để có sẵn thư mục)
+input/*
+!input/.gitkeep
+
+# Notebook checkpoint, file hệ điều hành / editor
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
