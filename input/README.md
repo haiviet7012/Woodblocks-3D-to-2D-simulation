@@ -1,37 +1,34 @@
 # Input assets
 
-The default scan is `stl/03284.stl`, relative to this directory. STL files are retained in the repository through Git LFS. The actual scan is not included by the setup change; its owner must upload it from the server.
+Only STL files under `input/` are ignored by Git (case-insensitive extension, including nested directories). Fonts, textures, JSON labels and other non-STL input assets can be committed normally.
 
-## Maintainer: add the scan
+## Commit fonts and textures
 
-Install Git LFS, update your checkout to include `.gitattributes`, and copy the real file to `input/stl/03284.stl`. Then, from the repository root:
+From the checkout containing the real files:
 
 ```bash
-git lfs install
-git check-attr filter -- input/stl/03284.stl
-git add input/stl/03284.stl
-.venv/bin/python scripts/input_manifest.py --write
-git add input/manifest.json
-git commit -m "Add 03284 scan and input checksums"
+git add input/fonts/NomNaTong-Regular.ttf
+git add input/wood_texture/Natural-Oak-Wood-Texture.jpg
+git commit -m "Add font and wood texture assets"
 git push
-git lfs ls-files
 ```
 
-The filter check should print `lfs`. `git push` uploads the actual LFS object through the installed LFS hook. Verify the upload by running preflight and hash checks in a fresh clone. Do not commit a placeholder pointer without uploading its object. If STL files were already tracked as ordinary Git blobs, enabling attributes alone does not migrate their existing history; plan migration separately rather than rewriting shared history automatically.
+No `git add -f` is required. Commit the real assets and their required license/attribution before expecting another clone to contain them. This change only adjusts the tracking policy; it does not supply files that exist exclusively on the server.
 
-GitHub blocks ordinary Git files above 100 MiB. Git LFS also has a per-file limit depending on the account plan (currently 2 GB for Free/Pro, 4 GB for Team and 5 GB for Enterprise Cloud). Check the current limits and available storage/bandwidth before upload:
+Expected notebook paths:
 
-- https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github
-- https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-- https://docs.github.com/en/billing/concepts/product-billing/git-lfs
+- `input/fonts/NomNaTong-Regular.ttf`: font for synthetic boards.
+- `input/wood_texture/Natural-Oak-Wood-Texture.jpg`: wood texture.
+- `input/stl/03284.stl`: local default scan, not distributed by Git.
 
-The size of 03284 is not known here. If it exceeds your plan's per-file limit, it cannot be pushed as one LFS object. The earlier approximately 7.8 GB scan would exceed these limits. Decide on a documented, validated smaller distributable or a separately designed chunk/reassembly workflow; do not silently substitute a reduced scan or claim it is identical. This PR does not alter the source mesh.
+## Supply the scan locally
 
-## Optional assets
+After cloning, create `input/stl/` if needed and copy the real scan to `input/stl/03284.stl`. Alternatively, edit `cfg.mesh_path` in section 1 of the notebook to use another local file. Keep `cfg.input_dir` as a directory. Scans inside date subdirectories such as `input/stl/031022/` also remain ignored.
 
-- `wood_texture/Natural-Oak-Wood-Texture.jpg`: local texture used by the notebook when available.
-- `fonts/NomNaTong-Regular.ttf`: font for synthetic boards; provide locally for offline use.
-- Annotation index and masks: set `cfg.annotation_index_path`; preserve the exact normalized-mesh identity and UV frame.
-- Character labels: set `cfg.labels_path` for matching labels.
+The ignore rule does not remove files already tracked in Git. Check `git ls-files input` if an STL was committed previously; removing it from tracking requires a separate deliberate change. This update does not delete local scans or rewrite history.
 
-Non-STL local assets remain ignored by default. To distribute a specific asset with permission, explicitly add that file (for example `git add -f input/wood_texture/Natural-Oak-Wood-Texture.jpg`) and include it in the manifest. Share the assets needed by the selected configuration, including annotations, to reproduce the same run. Do not publish assets without their required license/attribution.
+## Verify shared inputs
+
+On the source server, run `.venv/bin/python scripts/input_manifest.py --write`, then commit `input/manifest.json`. It records all local input assets, including the ignored STL, so recipients can verify their separately supplied scan with `--check`. A checksum does not upload the scan.
+
+For annotations, set `cfg.annotation_index_path` and preserve the exact normalized-mesh identity and UV frame. Set `cfg.labels_path` for matching character labels. Include the non-STL annotation assets needed by a reproducible run.

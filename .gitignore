@@ -12,12 +12,8 @@ outputs.zip
 figures/*
 !figures/.gitkeep
 
-# Keep STL scans and input documentation in Git; other local assets are opt-in.
-
-!input/stl/
-input/stl/*
-!input/stl/.gitkeep
-!input/stl/*.[sS][tT][lL]
+# Keep fonts, textures and other input assets; ignore only STL files.
+/input/**/*.[sS][tT][lL]
 
 # Notebook checkpoint, file hệ điều hành / editor
 .ipynb_checkpoints/

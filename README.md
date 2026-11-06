@@ -6,13 +6,11 @@ Mitsuba research pipeline for rendering 2D images from scanned Han-Nom woodblock
 
 ## Quick start
 
-Install Git LFS and Python 3.14.4 on the host first. These commands assume Bash on Linux and a `python3.14` executable for exactly that Python release.
+Install Git and Python 3.14.4 on the host first. These commands assume Bash on Linux and a `python3.14` executable for exactly that Python release.
 
 ```bash
-git lfs install
 git clone https://github.com/haiviet7012/Woodblocks-3D-to-2D-simulation.git
 cd Woodblocks-3D-to-2D-simulation
-git lfs pull
 python3.14 -c 'import sys; assert sys.version_info[:3] == (3, 14, 4), sys.version'
 python3.14 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
@@ -22,7 +20,7 @@ python3.14 -m venv .venv
 
 Open `mitsuba_research_v5_gpu.ipynb` in VS Code, select the **Woodblocks (Python 3.14.4)** kernel, and run cells in order. Also select `.venv/bin/python` with **Python: Select Interpreter** for Python-file analysis.
 
-The default scan is `input/stl/03284.stl`. STL files are tracked with Git LFS. Until the maintainer pushes the actual LFS object, a clone cannot supply that scan; preflight reports a missing file or pointer instead of trying to render it. See [input asset instructions](input/README.md).
+The default scan is `input/stl/03284.stl`. STL files anywhere under `input/` are ignored by Git; copy the scan into place locally after cloning. Fonts and textures in `input/fonts/` and `input/wood_texture/` can be committed normally and will be included in clones once uploaded. See [input asset instructions](input/README.md).
 
 ## Pipeline layout
 
