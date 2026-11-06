@@ -1,0 +1,2 @@
+# Keep scan meshes in this repository using Git Large File Storage.
+*.[sS][tT][lL] filter=lfs diff=lfs merge=lfs -text
