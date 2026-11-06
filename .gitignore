@@ -13,10 +13,7 @@ figures/*
 !figures/.gitkeep
 
 # Keep STL scans and input documentation in Git; other local assets are opt-in.
-input/*
-!input/.gitkeep
-!input/README.md
-!input/manifest.json
+
 !input/stl/
 input/stl/*
 !input/stl/.gitkeep
