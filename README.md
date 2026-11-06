@@ -18,7 +18,6 @@ This projects does not include the OCR system, only the image renderer and its a
 ### Metrics calculations:
 - v5_metrics_update.py
 
-### Outputs folder
 ### Pipeline notebook:
 - mitsuba_research_v5_gpu.ipynb
 
