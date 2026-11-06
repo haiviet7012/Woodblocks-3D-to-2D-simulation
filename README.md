@@ -22,7 +22,7 @@ python3.14 -m venv .venv
 .venv/bin/python scripts/preflight.py --render-probe --variant cuda_ad_rgb
 ```
 
-Open `mitsuba_research_v5_gpu.ipynb` in VS Code, select the **Woodblocks (Python 3.14.4)** kernel, and run cells in order. Also select `.venv/bin/python` with **Python: Select Interpreter** for Python-file analysis.
+Open `mitsuba_research_v5_gpu.ipynb` in VS Code, select the **Woodblocks (Python 3.14.4)** kernel, and run cells in order. Also select `.venv/bin/python` with **Python: Select Interpreter** for Python-file analysis. Full instructions for setting up the environment is in the first cell of the notebook.
 
 The default scan is `input/stl/03284.stl`. STL files anywhere under `input/` are ignored by Git; copy the scan into place locally after cloning. Fonts and textures in `input/fonts/` and `input/wood_texture/` can be committed normally and will be included in clones once uploaded. See [input asset instructions](input/README.md).
 
