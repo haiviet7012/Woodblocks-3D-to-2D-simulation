@@ -4,6 +4,10 @@ Mitsuba research pipeline for rendering 2D images from scanned Han-Nom woodblock
 
 **Reference Python: CPython 3.14.4. Reference platform: Linux x86_64.** `requirements.txt` is the server's frozen environment, including CUDA packages. It is not a cross-platform dependency guarantee. See [the full setup and run guide](docs/SETUP.md).
 
+## Detailed walkthrough
+
+See [Install dependencies, run the notebook, and inspect results](docs/RUNNING.md) for step-by-step Linux/Remote SSH instructions, interpreter/kernel selection, “import could not be resolved” fixes, creating `testing_outputs`, previewing images, reading CSV/JSON metrics and exporting a run.
+
 ## Quick start
 
 Install Git and Python 3.14.4 on the host first. These commands assume Bash on Linux and a `python3.14` executable for exactly that Python release.

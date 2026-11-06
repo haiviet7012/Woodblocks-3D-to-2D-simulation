@@ -1,5 +1,7 @@
 # Setup, execution and reproducibility
 
+For a hands-on walkthrough with output previews and import-diagnostic fixes, see [RUNNING.md](RUNNING.md).
+
 ## 1. Host prerequisites
 
 The recorded server uses CPython **3.14.4**, Linux x86_64 and glibc 2.43. The Python patch version is also recorded in `.python-version`; tools that understand that file can use it, but it does not install Python automatically.
