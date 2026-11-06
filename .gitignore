@@ -22,3 +22,6 @@ input/*
 Thumbs.db
 .vscode/
 .idea/
+
+# Large per-run artifacts
+testing_outputs/
