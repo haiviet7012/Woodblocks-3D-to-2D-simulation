@@ -567,6 +567,8 @@ def run_external_backend(path, context):
     t0=time.perf_counter()
     try:
         spec=importlib.util.spec_from_file_location('woodblock_metric_plugin',path)
+        if spec is None or spec.loader is None:
+            raise ImportError('Cannot load metric backend: '+str(path))
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         # Read-only views prevent an accidental plugin edit from changing exported evidence.
         import copy
